@@ -1,0 +1,27 @@
+<?php
+
+echo "<table border=1> <tr><th>ФИО</th><th>Номер</th></tr>"; 
+	while($result=mysql_fetch_array($data)){
+			echo '<tr><th>'.$result['name'].'</th><th>'.$result['number'].'</th></tr>' ;
+		}
+echo "</table>";
+
+?>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+</head>
+<body>
+<div><h2>Добавление номера</h2>
+<form method="post">
+Имя: <input type="text" name="name" value=" " required ><br>
+Номер: <input type="text" name="number" value="" required><br>
+<input type="submit" name="save">
+
+</form>
+<form method="post"><input type="submit" name="update" value="обновить"></form>
+<a href="authorization">Выход</a>
+</div>
+</body>
+</html>
