@@ -1,18 +1,25 @@
 ﻿<?php
-$file_path =__DIR__; 
-$file_path=str_replace('\\','/',$file_path);
+
+$filePath =__DIR__; 
+$filePath=str_replace('\\','/',$filePath);
 //var_dump($file_path);
-define("MAIN_PATH",$file_path);
+define("MAIN_PATH",$filePath);
 ini_set('display_errors', 1);
-function __autoload($class_name){
-	$pathCoreClass=MAIN_PATH . '/application/core/'.$class_name.".php";
-	$pathConrollerClass=MAIN_PATH . '/application/controllers/'.$class_name.".php";
-	$pathModelClass=MAIN_PATH . '/application/models/'.$class_name.".php";
+function __autoload($className)
+{
+	
+	$pathCoreClass=MAIN_PATH . '/application/core/'.$className.".php";
+	$pathConrollerClass=MAIN_PATH . '/application/controllers/'.$className.".php";
+	$pathModelClass=MAIN_PATH . '/application/models/'.$className.".php";
+	$pathHelperClass= MAIN_PATH .'/helper/'.$className.'.php';
 	if(file_exists($pathCoreClass)){
 		require_once $pathCoreClass;
+	}elseif(file_exists($pathConrollerClass)){
+		require_once $pathConrollerClass;
+	}elseif(file_exists($pathModelClass)){	
+		require_once $pathModelClass;
+	}else{
+		require_once $pathHelperClass;
 	}
-	else if(file_exists($pathConrollerClass))
-	{require_once $pathConrollerClass;}
-	else {require_once $pathModelClass;}
 }
 Route::start();
