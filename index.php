@@ -11,7 +11,7 @@ function __autoload($className)
 	$pathCoreClass=MAIN_PATH . '/application/core/'.$className.".php";
 	$pathConrollerClass=MAIN_PATH . '/application/controllers/'.$className.".php";
 	$pathModelClass=MAIN_PATH . '/application/models/'.$className.".php";
-	$pathHelperClass= MAIN_PATH .'/helper/'.$className.'.php';
+	$pathHelperClass= MAIN_PATH . '/application/core/helper/'.$className.".php";
 	if(file_exists($pathCoreClass)){
 		require_once $pathCoreClass;
 	}elseif(file_exists($pathConrollerClass)){
