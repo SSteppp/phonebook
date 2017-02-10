@@ -1,5 +1,5 @@
 ﻿<?php
-
+session_start();
 $filePath =__DIR__; 
 $filePath=str_replace('\\','/',$filePath);
 //var_dump($file_path);
@@ -7,11 +7,11 @@ define("MAIN_PATH",$filePath);
 ini_set('display_errors', 1);
 function __autoload($className)
 {
-	
 	$pathCoreClass=MAIN_PATH . '/application/core/'.$className.".php";
 	$pathConrollerClass=MAIN_PATH . '/application/controllers/'.$className.".php";
 	$pathModelClass=MAIN_PATH . '/application/models/'.$className.".php";
 	$pathHelperClass= MAIN_PATH . '/application/core/helper/'.$className.".php";
+	
 	if(file_exists($pathCoreClass)){
 		require_once $pathCoreClass;
 	}elseif(file_exists($pathConrollerClass)){

@@ -1,24 +1,22 @@
 <?php
-class Controllernumber extends Controller
+class ControllerNumber extends Controller
 {
 
 	function actionIndex()
-	{	session_start();
-		DB::getDB();
-		$query=mysql_query("SELECT * FROM number WHERE id=".Session::getSession('id'),DB::getCon());
-		$this->view->generate('numberView.php',$query);
+	{	
+		$query=DB::getDB()->query("SELECT * FROM number WHERE id=".Session::get('id'));
 		
-		if(null!=Request::post('save')){
-			$id=Session::getSession('id');
+		if(Request::post('save')){
+			$id=Session::get('id');
 			$name=Request::post('name');
 			$number=Request::post('number');
-			$query="INSERT INTO number (id, name, number) VALUES ('$id', '$name', '$number')";
-			$result=mysql_query($query,DB::getCon());
-			if(null!=Request::post('update')){
-				$query="UPDATE number SET id";
-				$result=mysql_query($query,DB::getCon());
+			$result=DB::getDB()->query("INSERT INTO number (id, name, number) VALUES ('$id', '$name', '$number')");
+			if(Request::post('update')){
+				
+				$result=DB::getDB()->query("UPDATE number SET id");
 			}
 		}	
 		
+		$this->view->generate('numberView.php',$query);
 	}
 }

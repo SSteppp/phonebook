@@ -1,8 +1,8 @@
-<?php
+﻿<?php
 
 echo "<table border=1> <tr><th>ФИО</th><th>Номер</th></tr>"; 
-	while($result=mysql_fetch_array($data))
-	{
+	while ($result=mysql_fetch_array($data)) {
+
 			echo '<tr><th>'.$result['name'].'</th><th>'.$result['number'].'</th></tr>' ;
 	}
 echo "</table>";
