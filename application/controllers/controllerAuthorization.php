@@ -5,17 +5,17 @@ class ControllerAuthorization extends Controller
 	function actionIndex()
 	{	
 		if (Request::post('submit')) {	
-			$login = Request::post('login');
-			$password = Request::post('password');
-			$query = Singleton::getSingl()->query("SELECT id FROM user WHERE login='$login' AND password='$password'");
-			$result = mysql_fetch_array($query);
-
-			if (empty($result['id'])) {
+			$params = array(
+				"login" => Request::post('login'),
+				"password" => Request::post('password')
+			);
+			$query = DB::getDB()->select("SELECT id FROM user WHERE login=':login' AND password=':password'", $params);
+			if (empty($query[0]['id'])) {
 				echo 'Неверные Логин или Пароль';
 			} else {
-				Session::set('login', $login);
-				Session::set('password', $password);
-				Session::set('id', $result['id']);
+				Session::set('login', $params['login']);
+				Session::set('password', $params['password']);
+				Session::set('id', $query[0]['id']);
 				Redirect::url('number');
 			}
 		}

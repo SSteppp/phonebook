@@ -4,6 +4,6 @@ class Redirect
 {
 	public static function url($name)
 	{
-		header('Location:http://'.Singleton::getSingl()->setting()['domain'].'/'.$name);
+		header('Location:http://'.Setting::getSetting()->get()['domain'].'/'.$name);
 	}
 }
